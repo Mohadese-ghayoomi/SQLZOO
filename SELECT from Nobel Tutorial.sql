@@ -28,9 +28,58 @@ select yr,subject,winner
 from nobel 
 where subject='Literature' and yr>=1980 and yr<=1989
 
---6.Show all details of the presidential winners:
+--6.Show all details of the presidential winners:Theodore Roosevelt,Woodrow Wilson,Jimmy Carter,Barack Obama
+Select yr,subject,winner
+from nobel 
+where winner in('Theodore Roosevelt','Woodrow Wilson'
+,'Jimmy Carter','Barack Obama')
 
-Theodore Roosevelt
-Woodrow Wilson
-Jimmy Carter
-Barack Obama
+--7.Show the winners with first name John
+
+select winner 
+from nobel 
+where winner like 'John%'
+
+--8.Show the year, subject, and name of Physics winners for 1980 together with the Chemistry winners for 1984.
+
+select *
+from nobel
+where (subject='physics' and yr='1980') or
+(subject='chemistry' and yr='1984')
+
+
+--9.Show the year, subject, and name of winners for 1980 excluding Chemistry and Medicine
+
+SELECT * 
+FROM nobel 
+WHERE yr='1980' and subject NOT IN('chemistry','Medicine')
+
+
+--10.Show year, subject, and name of people who won a 'Medicine' prize in an early year (before 1910, not including 1910) 
+--together with winners of a 'Literature' prize in a later year (after 2004, including 2004)
+
+SELECT * 
+FROM nobel 
+WHERE (subject='Medicine' and yr<'1910') OR (subject='Literature' and yr>='2004')
+
+
+--11.Find all details of the prize won by PETER GRÜNBERG
+
+SELECT *
+FROM nobel 
+WHERE winner='PETER GRÜNBERG' 
+
+--12.Find all details of the prize won by EUGENE O'NEILL(Single quotes)
+
+
+SELECT * 
+FROM nobel 
+WHERE winner IN('EUGENE O''NEILL')
+
+--13.List the winners, year and subject where the winner starts with Sir. Show the the most recent first, then by name order.
+
+SELECT winner,yr,subject 
+FROM nobel
+WHERE winner like 'Sir%'
+order by yr DESC,winner 
+
